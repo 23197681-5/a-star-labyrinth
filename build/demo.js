@@ -482,7 +482,7 @@ function calendarWeekHour(id, width, height, square) {
         .attr("width", width)
         .attr("height", height)
         .attr("class", "chart");
-    var calData = randomData(width, height, square);
+    var calData = randomData(width, height, square);//chama a funcao randon data que sera modificada para criar o labirinto do arquivo
     console.log(calData);
     var row = graph.selectAll(".row")
         .data(calData)
