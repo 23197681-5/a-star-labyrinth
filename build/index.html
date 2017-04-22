@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <link rel="stylesheet" href="dist/css/style.css">
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.8/angular-animate.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    </script>
+    </head>
+    <title>Read File (via User Input selection)</title>
+  
+</head>
+<body onload="checkFileAPI();" class="wraper">
+    <div id="container">   
+         <script src="https://d3js.org/d3.v4.min.js"></script>
+    <div id="chart"></div>
+<script type="text/javascript">
+    calendarWeekHour('#chart', 900, 400, true);
+</script>
+        <input type="file" class="btn btn-large" onchange='readText(this)' />
+        <br/>
+        <hr/>   
+        <h3>Contents of the Text file:</h3>
+        <div id="main">
+	    	<div id="search_grid">Loading grid...</div>
+        </div>
+    </div>
+
+	<script type='text/javascript' src='demo.js'></script>
+</body>
+</html>

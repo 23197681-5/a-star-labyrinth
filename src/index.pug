@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='dist/css/style.css')
+    link(rel='stylesheet', href='http://yui.yahooapis.com/pure/0.6.0/pure-min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js')
+    script(src='https://code.angularjs.org/1.5.8/angular-animate.min.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js', integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
+  title Read File (via User Input selection)
+  body.wraper(onload='checkFileAPI();')
+    #container
+      script(src='https://d3js.org/d3.v4.min.js')
+      #chart
+      script(type='text/javascript').
+        calendarWeekHour('#chart', 900, 400, true);
+      input.btn.btn-large(type='file', onchange='readText(this)')
+      br
+      hr
+      h3 Contents of the Text file:
+      #main
+        #search_grid Loading grid...
+    script(type='text/javascript', src='demo.js')
