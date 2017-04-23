@@ -112,13 +112,19 @@ $(function() {
 
 var css = { start: "start", finish: "finish", wall: "wall", active: "active" };
 
-function GraphSearch($graph, options, implementation) {
+function GraphSearch($graph : any, options : any, implementation : any) {
+	var tamanho;
 	this.$graph = $graph;
 	this.search = implementation;
-	this.opts = $.extend({wallFrequency:.1, debug:true, gridSize:10}, options);
+	var json_str = getCookie('mycookie');
+	lines = JSON.parse(json_str);
+	lines.shift();
+	// tamanho =  > lines[0].length ? lines.length : lines[0].length;
+	// console.log("tamanho do labirinto"+tamanho);
+	this.opts = $.extend({wallFrequency:.1, debug:true, gridSize:lines[0].length}, options);
 	this.initialize();
 }
-GraphSearch.prototype.setOption = function(opt) {
+GraphSearch.prototype.setOption = function(opt : any) {
 	this.opts = $.extend(this.opts, opt);
 	if(opt["debug"]||opt["debug"]==false) {
 		this.drawDebugInfo(opt["debug"]);
@@ -297,17 +303,6 @@ GraphSearch.prototype.animatePath = function(path : any) {
 
 
 module astar {
-	//================== start graph js
-	/* 
-	graph.js http://github.com/bgrins/javascript-astar
-	MIT License
-
-	Creates a Graph class used in the astar search algorithm.
-	Includes Binary Heap (with modifications) from Marijn Haverbeke 
-	    URL: http://eloquentjavascript.net/appendix2.html
-	    License: http://creativecommons.org/licenses/by/3.0/
-	*/
-
 	export interface Position {
 		x: number;
 		y: number;
@@ -767,7 +762,7 @@ function displayContents(txt : any) {
         if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser
             n = lines[i].replace(/ /g, ''); //.split('');
-            lines[i] = Array.from(n.charAt(n.length - 1) + n.substring(0, n.length - 1)); //.join();
+            lines[i] = Array.from(n);//n.charAt(n.length - 1) + n.substring(0, n.length - 1)); //.join();
         }
 		json_str = JSON.stringify(lines);
 		createCookie('mycookie', json_str);
