@@ -281,7 +281,7 @@ GraphSearch.prototype.animatePath = function(path : any) {
 		el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
 
 		if (lines[node.pos.x][node.pos.y] == "Q"){
-			score += 1;
+			score += 0.5;
 			scoreBox.innerHTML =  score;
 			console.log("Queijo")
 			}
