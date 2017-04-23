@@ -286,7 +286,7 @@ GraphSearch.prototype.animatePath = function(path : any) {
 			passos.push(""+node.pos.x+", "+node.pos.y);		
 			el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
 		if (lines[node.pos.x][node.pos.y] == "Q"){
-			score += 0.5;
+			score += 1;
 			scoreBox.innerHTML =  score;
 			console.log("Queijo")
 			}
