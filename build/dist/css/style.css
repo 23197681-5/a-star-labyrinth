@@ -177,7 +177,7 @@ pre span.key {
 	background-color: lightblue;
 }
 .grid_item.finish {
-
+	background-color: green;
 }
 #weightsKey {
   display: none;

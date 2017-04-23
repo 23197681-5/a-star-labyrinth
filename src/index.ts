@@ -6,6 +6,7 @@
 var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number, score : Number = 0;
 var reader : any;
 var lines : any = [];
+var saida : any;
 window.log = function(){
 	if(this.console){
 		//console.log( Array.prototype.slice.call(arguments) );
@@ -121,6 +122,7 @@ function GraphSearch($graph : any, options : any, implementation : any) {
 	// console.log("tamanho do labirinto"+tamanho);
 	this.opts = $.extend({wallFrequency:.1, debug:true, gridSize:lines[0].length}, options);
 	this.initialize();
+	this.cellClicked(saida);
 }
 GraphSearch.prototype.setOption = function(opt : any) {
 	this.opts = $.extend(this.opts, opt);
@@ -174,6 +176,9 @@ GraphSearch.prototype.initialize = function() {
 				if (lines[x][y] == "R"){
 					$cell.addClass(css.start);
 					startSet = true;
+				}else if(lines[x][y] == "S"){
+					$cell.addClass(css.finish);
+					saida = $cell;
 				}
 			}
 		}
