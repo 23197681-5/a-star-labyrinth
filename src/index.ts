@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-var json_str;
+var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number;
 var reader : any;
 var lines : any = [];
 window.log = function(){
@@ -26,6 +26,7 @@ function createCookie(name, value, days) {
 
 function getCookie(c_name) {
     if (document.cookie.length > 0) {
+		var c_start, c_end : any;
         c_start = document.cookie.indexOf(c_name + "=");
         if (c_start != -1) {
             c_start = c_start + c_name.length + 1;
@@ -38,30 +39,27 @@ function getCookie(c_name) {
     }
     return "";
 }
-var generateRandom = function (width, height, wallFrequency) {
+// var generateRandom = function (width : Number, height :Number, wallFrequency :any) {
 
-	var nodes = [];
+// 	var nodes = [];
 
-	for (var x=0; x < width; x++) {
-		var nodeRow = [];
-		var gridRow = [];
+// 	for (var x=0; x < width; x++) {
+// 		var nodeRow = [];
 
-		for(var y=0; y < height; y++) {
+// 		for(var y=0; y < height; y++) {
 
-			var isWall = Math.floor(Math.random()*(1/wallFrequency));
-			if(isWall == 0) {
-				nodeRow.push(astar.GraphNodeType.WALL);
-			}
-			else  {
-				nodeRow.push(astar.GraphNodeType.OPEN);
-			}
-		}
-		nodes.push(nodeRow);
-	}
-
-
-	return new Graph(nodes);
-};
+// 			var isWall = Math.floor(Math.random()*(1/wallFrequency));
+// 			if(isWall == 0) {
+// 				nodeRow.push(astar.GraphNodeType.WALL);
+// 			}
+// 			else  {
+// 				nodeRow.push(astar.GraphNodeType.OPEN);
+// 			}
+// 		}
+// 		nodes.push(nodeRow);
+// 	}
+// 	return new Graph(nodes);
+// };
 
 $(function() {
 
@@ -113,7 +111,6 @@ $(function() {
 var css = { start: "start", finish: "finish", wall: "wall", active: "active", queijo: "queijo"};
 
 function GraphSearch($graph : any, options : any, implementation : any) {
-	var tamanho;
 	this.$graph = $graph;
 	this.search = implementation;
 	var json_str = getCookie('mycookie');
@@ -191,7 +188,7 @@ GraphSearch.prototype.initialize = function() {
 		this.grid.push(gridRow);
 		nodes.push(nodeRow);
 	}
-	//PREENCHE O ESPACO FALTANTE
+	//PREENCHE O ESPACO FALTANTE {para garantir que nao ha espacos extra no labirinto}
 	isWall = 1;
 		for(x; x<this.opts.gridSize;x++) {
 			for(y;y<this.opts.gridSize;y++) {
@@ -227,7 +224,7 @@ GraphSearch.prototype.cellClicked = function($end) {
 	$end.addClass("finish");
 	var $start = this.$cells.filter("." + css.start);
 	var start = this.nodeFromElement($start);
-
+ 	var el = document.getElementById('chart');
 	var sTime = new Date();
 	var path = this.search(this.graph.nodes, start, end, this.opts.diagonal);
 	var fTime = new Date();
@@ -241,6 +238,9 @@ GraphSearch.prototype.cellClicked = function($end) {
 		if(this.opts.debug) {
 			this.drawDebugInfo(this.opts.debug);
 		}
+
+    	var el = document.getElementById('chart');
+		el.innerHTML = "";
 		this.animatePath(path);
 	}
 };
@@ -279,16 +279,21 @@ GraphSearch.prototype.animateNoPath = function() {
 GraphSearch.prototype.animatePath = function(path : any) {
 	var grid = this.grid;
 	var timeout = 1000 / grid.length;
-	var elementFromNode = function(node) {
+    var el = document.getElementById('chart');
+	
+	var elementFromNode = function(node:any) {
+		el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
+		rootNode = node.pos.x+", "+node.pos.y
 		return grid[node.pos.x][node.pos.y];
 	};
 
-	var removeClass = function(path, i) {
+	var removeClass = function(path : any, i: any) {
 		if(i>=path.length) return;
+		el.innerHTML += "";
 		elementFromNode(path[i]).removeClass(css.active);
 		setTimeout( function() { removeClass(path, i+1) }, timeout*path[i].cost);
 	}
-	var addClass = function(path, i)  {
+	var addClass = function(path: any, i: any)  {
 		if(i>=path.length) {  // Finished showing path, now remove
 			return removeClass(path, 0);
 		}

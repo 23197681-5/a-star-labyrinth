@@ -1,5 +1,5 @@
 
-  .grid_item.queijo{
+.grid_item.queijo{
 	width: 0;
 	height: 0;
 	background-color: gold;
@@ -9,16 +9,16 @@
 	border-right: 13px solid red;
 	border-color: transparent transparent #e1ff00 transparent;
 	}
-            html, .body, .select {
-                display: inline-block;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-             background: #2CAB5B;
+html, .body, .select {
+    display: inline-block;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background: #2CAB5B;
 }
 
-          .wraper {
-                max-width: 600px;
-                margin: 0 auto;
-            }
+.wraper {
+	max-width: 600px;
+	margin: 0 auto;
+}
      
 .clearfix {
   *zoom: 1;
