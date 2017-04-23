@@ -1,4 +1,65 @@
 
+.wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  background: lightgreen;
+}
+
+.footer {
+  background: lightgreen;
+}
+
+
+.aside-1 {
+  /*background: gold;*/
+}
+
+.aside-2 {
+ height: 600px;width:140px;overflow:auto;background-color:yellowgreen;color:white;scrollbar-base-color:gold;font-family:sans-serif;padding:10px;
+}
+
+@media all and (min-width: 600px) {
+  .aside {
+	max-width: 400px;
+    flex: 1 auto;
+  }
+}
+@media all and (min-width: 800px) {
+  .main {
+    flex: 3 0px;
+  }
+
+  .aside-1 {
+    order: 1;
+  }
+
+  .main {
+    order: 2;
+  }
+
+  .aside-2 {
+    order: 3;
+  }
+
+  .footer {
+    order: 4;
+  }
+}
 .grid_item.queijo{
 	width: 0;
 	height: 0;
@@ -14,12 +75,12 @@ html, .body, .select {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	background: #2CAB5B;
 }
-
+/*
 .wraper {
-	max-width: 600px;
+	max-width: 800px;
 	margin: 0 auto;
 }
-     
+     */
 .clearfix {
   *zoom: 1;
 }

@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number;
+var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number, score : Number;
 var reader : any;
 var lines : any = [];
 window.log = function(){
@@ -136,10 +136,7 @@ GraphSearch.prototype.initialize = function() {
 	var $graph = this.$graph;
 
 	$graph.empty();
-   // lines = Array.from(document.getElementById('chart').innerHTML);
-    //lines = lines.split("<br>");
-    //console.log(lines);
-
+	
 	var json_str = getCookie('mycookie');
 	lines = JSON.parse(json_str);
 	lines.shift();
@@ -289,10 +286,14 @@ GraphSearch.prototype.animatePath = function(path : any) {
 		if(i>=path.length) return;
 		elementFromNode(path[i]).removeClass(css.active);
 		setTimeout( function() { removeClass(path, i+1) }, timeout*path[i].cost);
-		if(path.hasClass(css.queijo)) {
-		}	
+			
 	}
 	var addClass = function(path: any, i: any)  {
+		if(path.hasClass(css.queijo)) {
+			score = document.getElementById('score-box').innerHTML;
+			var ponto : Number = 0.5;
+			document.getElementById('score-box').innerHTML = ""+(score + ponto);
+		}
 		if(i>=path.length) {  // Finished showing path, now remove
 			return removeClass(path, 0);
 		}
