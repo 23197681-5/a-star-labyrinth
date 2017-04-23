@@ -110,7 +110,7 @@ $(function() {
 
 });
 
-var css = { start: "start", finish: "finish", wall: "wall", active: "active" };
+var css = { start: "start", finish: "finish", wall: "wall", active: "active", queijo: "queijo"};
 
 function GraphSearch($graph : any, options : any, implementation : any) {
 	var tamanho;
@@ -166,7 +166,8 @@ GraphSearch.prototype.initialize = function() {
 			$cell.attr("id", id).attr("x", x).attr("y", y);
 			$row.append($cell);
 			gridRow.push($cell);
-			
+				if (lines[x][y] == "Q")
+					$cell.addClass(css.queijo);
 			if (lines[x][y]!= "#")
 				isWall = 0;
 			if(isWall == 1) {
