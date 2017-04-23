@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number, score : Number = 0;
+var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Any = [], score : Number = 0;
 var reader : any;
 var lines : any = [];
 var saida : any;
@@ -283,8 +283,8 @@ GraphSearch.prototype.animatePath = function(path : any) {
 	var scoreBox = document.getElementById('score-box');
 	
 	var elementFromNode = function(node:any) {
-		el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
-
+			passos.push(""+node.pos.x+", "+node.pos.y);		
+			el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
 		if (lines[node.pos.x][node.pos.y] == "Q"){
 			score += 0.5;
 			scoreBox.innerHTML =  score;
