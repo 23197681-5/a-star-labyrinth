@@ -847,7 +847,7 @@ GraphSearch.prototype.drawDebugInfo = function (show) {
                 $(this).html(debug);
             }
         });
-    }
+     } 
 };
 GraphSearch.prototype.nodeFromElement = function ($cell) {
     return this.graph.nodes[parseInt($cell.attr("x"))][parseInt($cell.attr("y"))];
