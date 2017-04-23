@@ -294,23 +294,15 @@ GraphSearch.prototype.animatePath = function(path : any) {
 		return grid[node.pos.x][node.pos.y];
 	};
 
-	var removeClass = function(path : any, i: any) {
-		if(i>=path.length) return;
-		elementFromNode(path[i]).removeClass(css.active);
-		setTimeout( function() { removeClass(path, i+1) }, timeout*path[i].cost);
-			
-	}
 	var addClass = function(path: any, i: any)  {
 		if(i>=path.length) {  // Finished showing path, now remove
-			return removeClass(path, 0);
+			
 		}
 		elementFromNode(path[i]).addClass(css.active);
 		setTimeout( function() { addClass(path, i+1) }, timeout*path[i].cost);
 	};
 
 	addClass(path, 0)
-	this.$graph.find("." + css.start).removeClass(css.start);
-	this.$graph.find("." + css.finish).removeClass(css.finish).addClass(css.start);
 };
 
 

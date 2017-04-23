@@ -6,6 +6,7 @@
 var json_str, rootNode = "<b>Passos:<b><br><br> S", passos = [], score = 0;
 var reader;
 var lines = [];
+var saida;
 window.log = function () {
     if (this.console) {
         //console.log( Array.prototype.slice.call(arguments) );
@@ -106,6 +107,7 @@ function GraphSearch($graph, options, implementation) {
     // console.log("tamanho do labirinto"+tamanho);
     this.opts = $.extend({ wallFrequency: .1, debug: true, gridSize: lines[0].length }, options);
     this.initialize();
+    this.cellClicked(saida);
 }
 GraphSearch.prototype.setOption = function (opt) {
     this.opts = $.extend(this.opts, opt);
@@ -159,6 +161,10 @@ GraphSearch.prototype.initialize = function () {
                 if (lines[x][y] == "R") {
                     $cell.addClass(css.start);
                     startSet = true;
+                }
+                else if (lines[x][y] == "S") {
+                    $cell.addClass(css.finish);
+                    saida = $cell;
                 }
             }
         }
@@ -264,22 +270,13 @@ GraphSearch.prototype.animatePath = function (path) {
         rootNode = node.pos.x + ", " + node.pos.y;
         return grid[node.pos.x][node.pos.y];
     };
-    var removeClass = function (path, i) {
-        if (i >= path.length)
-            return;
-        elementFromNode(path[i]).removeClass(css.active);
-        setTimeout(function () { removeClass(path, i + 1); }, timeout * path[i].cost);
-    };
     var addClass = function (path, i) {
         if (i >= path.length) {
-            return removeClass(path, 0);
         }
         elementFromNode(path[i]).addClass(css.active);
         setTimeout(function () { addClass(path, i + 1); }, timeout * path[i].cost);
     };
     addClass(path, 0);
-    this.$graph.find("." + css.start).removeClass(css.start);
-    this.$graph.find("." + css.finish).removeClass(css.finish).addClass(css.start);
 };
 var astar;
 (function (astar_1) {
