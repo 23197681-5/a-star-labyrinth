@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number, score : Number;
+var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Number, score : Number = 0;
 var reader : any;
 var lines : any = [];
 window.log = function(){
@@ -235,6 +235,7 @@ GraphSearch.prototype.cellClicked = function($end) {
 
     	var el = document.getElementById('chart');
 		el.innerHTML = "";
+		score = 0;
 		this.animatePath(path);
 	}
 };
@@ -274,10 +275,16 @@ GraphSearch.prototype.animatePath = function(path : any) {
 	var grid = this.grid;
 	var timeout = 1000 / grid.length;
     var el = document.getElementById('chart');
-	
+	var scoreBox = document.getElementById('score-box');
 	
 	var elementFromNode = function(node:any) {
 		el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
+
+		if (lines[node.pos.x][node.pos.y] == "Q"){
+			score += 1;
+			scoreBox.innerHTML =  score;
+			console.log("Queijo")
+			}
 		rootNode = node.pos.x+", "+node.pos.y
 		return grid[node.pos.x][node.pos.y];
 	};
@@ -289,11 +296,6 @@ GraphSearch.prototype.animatePath = function(path : any) {
 			
 	}
 	var addClass = function(path: any, i: any)  {
-		if(path.hasClass(css.queijo)) {
-			score = document.getElementById('score-box').innerHTML;
-			var ponto : Number = 0.5;
-			document.getElementById('score-box').innerHTML = ""+(score + ponto);
-		}
 		if(i>=path.length) {  // Finished showing path, now remove
 			return removeClass(path, 0);
 		}
