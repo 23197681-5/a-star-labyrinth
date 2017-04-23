@@ -39,27 +39,32 @@ function getCookie(c_name) {
     }
     return "";
 }
-// var generateRandom = function (width : Number, height :Number, wallFrequency :any) {
+// $(document).ready(function() {
+//    $("#score-box").change(function() {
+//       $(this).toggleClass("pulsate");
+//      });
+// });
+var generateRandom = function (width : Number, height :Number, wallFrequency :any) {
 
-// 	var nodes = [];
+	var nodes = [];
 
-// 	for (var x=0; x < width; x++) {
-// 		var nodeRow = [];
+	for (var x=0; x < width; x++) {
+		var nodeRow = [];
 
-// 		for(var y=0; y < height; y++) {
+		for(var y=0; y < height; y++) {
 
-// 			var isWall = Math.floor(Math.random()*(1/wallFrequency));
-// 			if(isWall == 0) {
-// 				nodeRow.push(astar.GraphNodeType.WALL);
-// 			}
-// 			else  {
-// 				nodeRow.push(astar.GraphNodeType.OPEN);
-// 			}
-// 		}
-// 		nodes.push(nodeRow);
-// 	}
-// 	return new Graph(nodes);
-// };
+			var isWall = Math.floor(Math.random()*(1/wallFrequency));
+			if(isWall == 0) {
+				nodeRow.push(astar.GraphNodeType.WALL);
+			}
+			else  {
+				nodeRow.push(astar.GraphNodeType.OPEN);
+			}
+		}
+		nodes.push(nodeRow);
+	}
+	return new Graph(nodes);
+};
 
 $(function() {
 
@@ -77,10 +82,6 @@ $(function() {
 	};
 
 		var grid = new GraphSearch($grid, opts, astar.AStar.search);
-	
-	//$("#btnGenerate").click(function() {
-	//	grid.initialize();
-	//});
 
 	$("#$chart").change(function() {
 		grid.initialize();
@@ -147,10 +148,6 @@ GraphSearch.prototype.initialize = function() {
 	var cellHeight = ($graph.height()/this.opts.gridSize)-2;
 	var $cellTemplate = $("<span />").addClass("grid_item").width(cellWidth).height(cellHeight);
 	var startSet = false;
-
-//x<this.opts.gridSize
-	while(lines[0][0] ==  null)
-                sleep(10000);
 	for(var x=0; lines[x];x++) {
 		var $row = $("<div class='clear' />");
 		var nodeRow = [];
@@ -290,10 +287,10 @@ GraphSearch.prototype.animatePath = function(path : any) {
 
 	var removeClass = function(path : any, i: any) {
 		if(i>=path.length) return;
-		if(path.hasClass(css.queijo)) {
-		log("clicked on wall or start...", $end);
-	}	elementFromNode(path[i]).removeClass(css.active);
+		elementFromNode(path[i]).removeClass(css.active);
 		setTimeout( function() { removeClass(path, i+1) }, timeout*path[i].cost);
+		if(path.hasClass(css.queijo)) {
+		}	
 	}
 	var addClass = function(path: any, i: any)  {
 		if(i>=path.length) {  // Finished showing path, now remove
@@ -765,7 +762,7 @@ function displayContents(txt : any) {
     var n;
     var el = document.getElementById('chart');
     lines = txt.split("\n");
-    //el.innerHTML = "";
+    el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
         if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser
