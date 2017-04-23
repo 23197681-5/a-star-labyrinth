@@ -1019,7 +1019,7 @@ function displayContents(txt) {
     for (var i = 0; lines[i]; i++) {
         if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser
-            n = lines[i]; //.split('');
+            n = lines[i].replace(/ /g, ''); //.split('');
             lines[i] = Array.from(n.charAt(n.length - 1) + n.substring(0, n.length - 1)); //.join();
         }
         el.innerHTML += lines[i] + "<br>";
