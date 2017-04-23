@@ -958,10 +958,10 @@ function displayContents(txt) {
     lines = txt.split("\n");
     el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
-        if (i > 1) {
+        if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser
             n = lines[i]; //.split('');
-            lines[i] = n.charAt(n.length - 1) + n.substring(0, n.length - 1); //.join();
+            lines[i] = Array.from(n.charAt(n.length - 1) + n.substring(0, n.length - 1)); //.join();
         }
         el.innerHTML += lines[i] + "<br>";
     }
