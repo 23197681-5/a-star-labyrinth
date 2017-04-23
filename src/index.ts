@@ -281,6 +281,7 @@ GraphSearch.prototype.animatePath = function(path : any) {
 	var timeout = 1000 / grid.length;
     var el = document.getElementById('chart');
 	
+	
 	var elementFromNode = function(node:any) {
 		el.innerHTML += rootNode+"("+node.pos.x+", "+node.pos.y+")<br>";
 		rootNode = node.pos.x+", "+node.pos.y
@@ -289,8 +290,9 @@ GraphSearch.prototype.animatePath = function(path : any) {
 
 	var removeClass = function(path : any, i: any) {
 		if(i>=path.length) return;
-		el.innerHTML += "";
-		elementFromNode(path[i]).removeClass(css.active);
+		if(path.hasClass(css.queijo)) {
+		log("clicked on wall or start...", $end);
+	}	elementFromNode(path[i]).removeClass(css.active);
 		setTimeout( function() { removeClass(path, i+1) }, timeout*path[i].cost);
 	}
 	var addClass = function(path: any, i: any)  {

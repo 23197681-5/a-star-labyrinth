@@ -263,7 +263,9 @@ GraphSearch.prototype.animatePath = function (path) {
     var removeClass = function (path, i) {
         if (i >= path.length)
             return;
-        el.innerHTML += "";
+        if (path.hasClass(css.queijo)) {
+            log("clicked on wall or start...", $end);
+        }
         elementFromNode(path[i]).removeClass(css.active);
         setTimeout(function () { removeClass(path, i + 1); }, timeout * path[i].cost);
     };
