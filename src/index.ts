@@ -3,15 +3,41 @@
 	
 	Set up the demo page for the A* Search
 */
+var json_str;
 var reader : any;
 var lines : any = [];
 window.log = function(){
 	if(this.console){
-		console.log( Array.prototype.slice.call(arguments) );
+		//console.log( Array.prototype.slice.call(arguments) );
 	}
 };
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
 
-
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
 var generateRandom = function (width, height, wallFrequency) {
 
 	var nodes = [];
@@ -52,28 +78,28 @@ $(function() {
 		diagonal: $searchDiagonal.is("checked")
 	};
 
-	var grid = new GraphSearch($grid, opts, astar.AStar.search);
-
-	$("#btnGenerate").click(function() {
-		grid.initialize();
-	});
+		var grid = new GraphSearch($grid, opts, astar.AStar.search);
+	
+	//$("#btnGenerate").click(function() {
+	//	grid.initialize();
+	//});
 
 	$("#$chart").change(function() {
 		grid.initialize();
 	});
 
-	$selectGridSize.change(function() {
-		grid.setOption({gridSize: $(this).val()});
-		grid.initialize();
-	});
+	//$selectGridSize.change(function() {
+	//	grid.setOption({gridSize: $(this).val()});
+	//	grid.initialize();
+//	});
 
-	$checkDebug.change(function() {
-		grid.setOption({debug: $(this).is(":checked")});
-	});
+//	$checkDebug.change(function() {
+//		grid.setOption({debug: $(this).is(":checked")});
+//	});
 	
-	$searchDiagonal.change(function() {
-		grid.setOption({diagonal: $(this).is(":checked")});
-	});
+//	$searchDiagonal.change(function() {
+//		grid.setOption({diagonal: $(this).is(":checked")});
+//	});
 	$("#generateWeights").click( function () {
 		if ($("#generateWeights").prop("checked")) {
 			$('#weightsKey').slideDown();
@@ -106,29 +132,38 @@ GraphSearch.prototype.initialize = function() {
 	var $graph = this.$graph;
 
 	$graph.empty();
-    lines = document.getElementById('chart').innerHTML;
-    lines = lines.split("<br>");
-    console.log(lines);
+   // lines = Array.from(document.getElementById('chart').innerHTML);
+    //lines = lines.split("<br>");
+    //console.log(lines);
+
+	var json_str = getCookie('mycookie');
+	lines = JSON.parse(json_str);
+	lines.shift();
+	console.log(lines);
 	var cellWidth = ($graph.width()/this.opts.gridSize)-2;  // -2 for border
 	var cellHeight = ($graph.height()/this.opts.gridSize)-2;
 	var $cellTemplate = $("<span />").addClass("grid_item").width(cellWidth).height(cellHeight);
 	var startSet = false;
 
-	for(var x=0;x<this.opts.gridSize;x++) {
+//x<this.opts.gridSize
+	while(lines[0][0] ==  null)
+                sleep(10000);
+	for(var x=0; lines[x];x++) {
 		var $row = $("<div class='clear' />");
-
 		var nodeRow = [];
 		var gridRow = [];
-
-		for(var y=0;y<this.opts.gridSize;y++) {
+//y<this.opts.gridSize
+		for(var y=0;lines[x][y];y++) {
 			var id = "cell_"+x+"_"+y;
 			var $cell = $cellTemplate.clone();
+			var isWall = 1;
 			$cell.attr("id", id).attr("x", x).attr("y", y);
 			$row.append($cell);
 			gridRow.push($cell);
-
-			var isWall = Math.floor(Math.random()*(1/self.opts.wallFrequency));
-			if(isWall == 0) {
+			
+			if (lines[x][y]!= "#")
+				isWall = 0;
+			if(isWall == 1) {
 				nodeRow.push(astar.GraphNodeType.WALL);
 				$cell.addClass(css.wall);
 			}
@@ -137,7 +172,8 @@ GraphSearch.prototype.initialize = function() {
 				nodeRow.push(cell_weight);
 				$cell.addClass('weight' + cell_weight);
 				if ($("#displayWeights").prop("checked")) {$cell.html(cell_weight)};
-				if (!startSet) {
+				//if (!startSet) 
+				if (lines[x][y] == "R"){
 					$cell.addClass(css.start);
 					startSet = true;
 				}
@@ -148,6 +184,22 @@ GraphSearch.prototype.initialize = function() {
 		this.grid.push(gridRow);
 		nodes.push(nodeRow);
 	}
+	//PREENCHE O ESPACO FALTANTE
+	isWall = 1;
+		for(x; x<this.opts.gridSize;x++) {
+			for(y;y<this.opts.gridSize;y++) {
+			$cell.attr("id", id).attr("x", x).attr("y", y);
+			$row.append($cell);
+			gridRow.push($cell);
+			nodeRow.push(astar.GraphNodeType.WALL);
+			$cell.addClass(css.wall);
+		}
+		$graph.append($row);
+		this.grid.push(gridRow);
+		nodes.push(nodeRow);
+	}
+
+
 
 	this.graph = new astar.Graph(nodes);
 
@@ -717,6 +769,9 @@ function displayContents(txt : any) {
             n = lines[i].replace(/ /g, ''); //.split('');
             lines[i] = Array.from(n.charAt(n.length - 1) + n.substring(0, n.length - 1)); //.join();
         }
+		json_str = JSON.stringify(lines);
+		createCookie('mycookie', json_str);
+		//Later on, to retrieve the cookie's contents as an array:
         el.innerHTML += lines[i] + "<br>";
     }
  }
