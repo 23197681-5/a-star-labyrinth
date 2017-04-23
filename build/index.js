@@ -85,6 +85,9 @@ GraphSearch.prototype.initialize = function () {
     var nodes = [];
     var $graph = this.$graph;
     $graph.empty();
+    lines = document.getElementById('chart').innerHTML;
+    lines = lines.split("<br>");
+    console.log(lines);
     var cellWidth = ($graph.width() / this.opts.gridSize) - 2; // -2 for border
     var cellHeight = ($graph.height() / this.opts.gridSize) - 2;
     var $cellTemplate = $("<span />").addClass("grid_item").width(cellWidth).height(cellHeight);
