@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-
+var lines : any = [];
 window.log = function(){
 	if(this.console){
 		console.log( Array.prototype.slice.call(arguments) );
@@ -57,8 +57,7 @@ $(function() {
 		grid.initialize();
 	});
 
-	$selectWallFrequency.change(function() {
-		grid.setOption({wallFrequency: $(this).val()});
+	$("#$chart).change(function() {
 		grid.initialize();
 	});
 
@@ -709,8 +708,8 @@ function convertToNumbers(output) {
  * display content using a basic HTML replacement
  */
 function displayContents(txt) {
-    var lab;
-    var el = document.getElementById('main');
+    var n;
+    var el = document.getElementById('chart');
     lines = txt.split("\n");
     el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
@@ -721,23 +720,4 @@ function displayContents(txt) {
         }
         el.innerHTML += lines[i] + "<br>";
     }
-    ProcurarSaida(lines);
-}
-function ProcurarSaida(lines) {
-    console.log(lines);
-    var graph = [
-        [1, 1, 1, 1],
-        [0, 1, 1, 0],
-        [0, 0, 1, 1]
-    ];
-    graph.grid = [
-        [1, 1, 1, 1],
-        [0, 1, 1, 0],
-        [0, 0, 1, 1]
-    ];
-    var start = graph.grid[0][0];
-    var end = graph.grid[1][2];
-    var result = astar.search(graph, start, end);
-    console.log(result);
-    // result is an array containing the shortest path
-   }
+ }

@@ -591,7 +591,7 @@ function convertToNumbers(output) {
  */
 function displayContents(txt) {
     var lab;
-    var el = document.getElementById('main');
+    var el = document.getElementById('chart');
     lines = txt.split("\n");
     el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
@@ -602,23 +602,4 @@ function displayContents(txt) {
         }
         el.innerHTML += lines[i] + "<br>";
     }
-    ProcurarSaida(lines);
-}
-function ProcurarSaida(lines) {
-    console.log(lines);
-    var graph = [
-        [1, 1, 1, 1],
-        [0, 1, 1, 0],
-        [0, 0, 1, 1]
-    ];
-    graph.grid = [
-        [1, 1, 1, 1],
-        [0, 1, 1, 0],
-        [0, 0, 1, 1]
-    ];
-    var start = graph.grid[0][0];
-    var end = graph.grid[1][2];
-    var result = astar.search(graph, start, end);
-    console.log(result);
-    // result is an array containing the shortest path
 }

@@ -16,30 +16,15 @@
   
 </head>
 <body onload="checkFileAPI();" class="wraper">
-    <div class="content">
-        	    <div id="controls" class='clear'>
-        	<input type="button" id="btnGenerate" value="Generate New Map" />
-	    </div>
-
+    <div class="container">
+           <input type="file" onchange='readText(this)'  id="btnGenerate" />
+           <!--btn btn-large   -->
 	    <div id="main">
 	    	<div id="search_grid">Loading grid...</div>
 	    </div>
 
-	</div>
-	<div id="footer"></div>
-<div/>   
-    <div id="container">   
-         <!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
     <div id="chart"></div>
-<script type="text/javascript">
-    // calendarWeekHour('#chart', 900, 400, true);
-</script>
-        <input type="file" class="btn btn-large" onchange='readText(this)' />
-        <br/>
-        <hr/>   
-        <h3>Contents of the Text file:</h3>
-    
-
+	</div>
 	<script type='text/javascript' src='index.js'></script>
 </body>
 </html>
