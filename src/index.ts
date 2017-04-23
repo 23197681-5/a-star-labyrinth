@@ -3,7 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
-var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Any = [], score : Number = 0;
+var json_str, rootNode : any = "<b>Passos:<b><br><br> S", passos : Any = [], score : Number = 0, totpassos : Number = 0;
 var reader : any;
 var lines : any = [];
 var saida : any;
@@ -280,7 +280,8 @@ GraphSearch.prototype.animatePath = function(path : any) {
 	var grid = this.grid;
 	var timeout = 1000 / grid.length;
     var el = document.getElementById('chart');
-	var scoreBox = document.getElementById('score-box');
+	var scoreBox = document.getElementById('score-box-queijos');
+	var scoreBoxPassos = document.getElementById('score-box-passos');
 	
 	var elementFromNode = function(node:any) {
 			passos.push(""+node.pos.x+", "+node.pos.y);		
@@ -289,7 +290,12 @@ GraphSearch.prototype.animatePath = function(path : any) {
 			score += 1;
 			scoreBox.innerHTML =  score;
 			console.log("Queijo")
-			}
+		}
+		
+		totpassos += 1;
+		
+		scoreBoxPassos.innerHTML = totpassos;
+		
 		rootNode = node.pos.x+", "+node.pos.y
 		return grid[node.pos.x][node.pos.y];
 	};
