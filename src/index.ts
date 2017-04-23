@@ -3,6 +3,7 @@
 	
 	Set up the demo page for the A* Search
 */
+var reader : any;
 var lines : any = [];
 window.log = function(){
 	if(this.console){
@@ -57,7 +58,7 @@ $(function() {
 		grid.initialize();
 	});
 
-	$("#$chart).change(function() {
+	$("#$chart").change(function() {
 		grid.initialize();
 	});
 
@@ -182,7 +183,7 @@ GraphSearch.prototype.cellClicked = function($end) {
 		this.animatePath(path);
 	}
 };
-GraphSearch.prototype.drawDebugInfo = function(show) {
+GraphSearch.prototype.drawDebugInfo = function(show : any) {
 	this.$cells.html(" ");
 	var that = this;
 	if(show) {
@@ -200,7 +201,7 @@ GraphSearch.prototype.drawDebugInfo = function(show) {
 
 	}
 };
-GraphSearch.prototype.nodeFromElement = function($cell) {
+GraphSearch.prototype.nodeFromElement = function($cell : any) {
 	return this.graph.nodes[parseInt($cell.attr("x"))][parseInt($cell.attr("y"))];
 };
 GraphSearch.prototype.animateNoPath = function() {
@@ -214,7 +215,7 @@ GraphSearch.prototype.animateNoPath = function() {
 	};
 	jiggle(15);
 };
-GraphSearch.prototype.animatePath = function(path) {
+GraphSearch.prototype.animatePath = function(path : any) {
 	var grid = this.grid;
 	var timeout = 1000 / grid.length;
 	var elementFromNode = function(node) {
@@ -652,10 +653,6 @@ module astar {
 		}
 	}
 }
-var reader; //GLOBAL File Reader object for demo purpose only
-/**
- * Check for the various File API support.
- */
 function checkFileAPI() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         reader = new FileReader();
@@ -669,7 +666,7 @@ function checkFileAPI() {
 /**
  * read text input
  */
-function readText(filePath) {
+function readText(filePath : any) {
     var output = ""; //placeholder for text output
     if (filePath.files && filePath.files[0]) {
         reader.onload = function (e) {
@@ -699,7 +696,7 @@ function readText(filePath) {
     }
     return true;
 }
-function convertToNumbers(output) {
+function convertToNumbers(output : any) {
     // &colon;&rpar;
     output = output;
     return output;
@@ -707,11 +704,11 @@ function convertToNumbers(output) {
 /**
  * display content using a basic HTML replacement
  */
-function displayContents(txt) {
+function displayContents(txt : any) {
     var n;
     var el = document.getElementById('chart');
     lines = txt.split("\n");
-    el.innerHTML = "";
+    //el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
         if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser

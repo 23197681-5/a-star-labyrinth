@@ -3,6 +3,8 @@
     
     Set up the demo page for the A* Search
 */
+var reader;
+var lines = [];
 window.log = function () {
     if (this.console) {
         console.log(Array.prototype.slice.call(arguments));
@@ -42,8 +44,7 @@ $(function () {
     $("#btnGenerate").click(function () {
         grid.initialize();
     });
-    $selectWallFrequency.change(function () {
-        grid.setOption({ wallFrequency: $(this).val() });
+    $("#$chart").change(function () {
         grid.initialize();
     });
     $selectGridSize.change(function () {
@@ -534,10 +535,6 @@ var astar;
     AStar.NO_CHECK_START_POINT = false;
     astar_1.AStar = AStar;
 })(astar || (astar = {}));
-var reader; //GLOBAL File Reader object for demo purpose only
-/**
- * Check for the various File API support.
- */
 function checkFileAPI() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
         reader = new FileReader();
@@ -590,10 +587,10 @@ function convertToNumbers(output) {
  * display content using a basic HTML replacement
  */
 function displayContents(txt) {
-    var lab;
+    var n;
     var el = document.getElementById('chart');
     lines = txt.split("\n");
-    el.innerHTML = "";
+    //el.innerHTML = "";
     for (var i = 0; lines[i]; i++) {
         if (i > 0) {
             //  lines[1] = lines[i].split('');//remove o espaco inserto automaticamente pelo browser
