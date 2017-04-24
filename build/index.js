@@ -39,28 +39,6 @@ function getCookie(c_name) {
     }
     return "";
 }
-// $(document).ready(function() {
-//    $("#score-box").change(function() {
-//       $(this).toggleClass("pulsate");
-//      });
-// });
-var generateRandom = function (width, height, wallFrequency) {
-    var nodes = [];
-    for (var x = 0; x < width; x++) {
-        var nodeRow = [];
-        for (var y = 0; y < height; y++) {
-            var isWall = Math.floor(Math.random() * (1 / wallFrequency));
-            if (isWall == 0) {
-                nodeRow.push(astar.GraphNodeType.WALL);
-            }
-            else {
-                nodeRow.push(astar.GraphNodeType.OPEN);
-            }
-        }
-        nodes.push(nodeRow);
-    }
-    return new Graph(nodes);
-};
 $(function () {
     var $grid = $("#search_grid");
     var $selectWallFrequency = $("#selectWallFrequency");

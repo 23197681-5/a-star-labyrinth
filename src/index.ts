@@ -40,32 +40,6 @@ function getCookie(c_name) {
     }
     return "";
 }
-// $(document).ready(function() {
-//    $("#score-box").change(function() {
-//       $(this).toggleClass("pulsate");
-//      });
-// });
-var generateRandom = function (width : Number, height :Number, wallFrequency :any) {
-
-	var nodes = [];
-
-	for (var x=0; x < width; x++) {
-		var nodeRow = [];
-
-		for(var y=0; y < height; y++) {
-
-			var isWall = Math.floor(Math.random()*(1/wallFrequency));
-			if(isWall == 0) {
-				nodeRow.push(astar.GraphNodeType.WALL);
-			}
-			else  {
-				nodeRow.push(astar.GraphNodeType.OPEN);
-			}
-		}
-		nodes.push(nodeRow);
-	}
-	return new Graph(nodes);
-};
 
 $(function() {
 
@@ -88,18 +62,6 @@ $(function() {
 		grid.initialize();
 	});
 
-	//$selectGridSize.change(function() {
-	//	grid.setOption({gridSize: $(this).val()});
-	//	grid.initialize();
-//	});
-
-//	$checkDebug.change(function() {
-//		grid.setOption({debug: $(this).is(":checked")});
-//	});
-	
-//	$searchDiagonal.change(function() {
-//		grid.setOption({diagonal: $(this).is(":checked")});
-//	});
 	$("#generateWeights").click( function () {
 		if ($("#generateWeights").prop("checked")) {
 			$('#weightsKey').slideDown();
@@ -124,12 +86,14 @@ function GraphSearch($graph : any, options : any, implementation : any) {
 	this.initialize();
 	this.cellClicked(saida);
 }
+
 GraphSearch.prototype.setOption = function(opt : any) {
 	this.opts = $.extend(this.opts, opt);
 	if(opt["debug"]||opt["debug"]==false) {
 		this.drawDebugInfo(opt["debug"]);
 	}
 };
+
 GraphSearch.prototype.initialize = function() {
 
 	var self = this;
