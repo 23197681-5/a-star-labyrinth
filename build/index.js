@@ -55,16 +55,6 @@ $(function () {
     $("#$chart").change(function () {
         grid.initialize();
     });
-    //$selectGridSize.change(function() {
-    //	grid.setOption({gridSize: $(this).val()});
-    //	grid.initialize();
-    //	});
-    //	$checkDebug.change(function() {
-    //		grid.setOption({debug: $(this).is(":checked")});
-    //	});
-    //	$searchDiagonal.change(function() {
-    //		grid.setOption({diagonal: $(this).is(":checked")});
-    //	});
     $("#generateWeights").click(function () {
         if ($("#generateWeights").prop("checked")) {
             $('#weightsKey').slideDown();
@@ -245,6 +235,18 @@ GraphSearch.prototype.animatePath = function (path) {
             score += 1;
             scoreBox.innerHTML = score;
             console.log("Queijo");
+            var player = document.createElement('audio');
+            player.src = 'https://dl.dropbox.com/u/7079101/coin.mp3';
+            player.preload = 'auto';
+            for (var i = 0; i <= 10; i++) {
+                if (i === 0) {
+                    // Play a sound when i === 10
+                    player.play();
+                }
+                else {
+                    console.log('Not yet!');
+                }
+            }
         }
         totpassos += 1;
         scoreBoxPassos.innerHTML = totpassos;

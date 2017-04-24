@@ -253,7 +253,19 @@ GraphSearch.prototype.animatePath = function(path : any) {
 		if (lines[node.pos.x][node.pos.y] == "Q"){
 			score += 1;
 			scoreBox.innerHTML =  score;
-			console.log("Queijo")
+			console.log("Queijo");
+			var player = document.createElement('audio');
+	player.src = 'https://dl.dropbox.com/u/7079101/coin.mp3';
+	player.preload = 'auto';
+
+	for (var i = 0; i <= 10; i++) {
+	if (i === 0) {
+		// Play a sound when i === 10
+		player.play();
+	} else {
+		console.log('Not yet!');
+	}
+	}
 		}
 		
 		totpassos += 1;
