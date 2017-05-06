@@ -172,7 +172,7 @@ GraphSearch.prototype.initialize = function() {
 
 	// bind cell event, set start/wall positions
 	this.$cells = $graph.find(".grid_item");
-	this.$cells.click(function() { self.cellClicked($(this)) });
+	//this.$cells.click(function() { self.cellClicked($(this)) });
 };
 GraphSearch.prototype.cellClicked = function($end) {
 
