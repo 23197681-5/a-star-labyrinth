@@ -1,5 +1,5 @@
 **Maze problem**
 In the root:
-yarn install
-yarn build
-yarn start
+yarn install && <br>
+yarn build && <br>
+yarn start &&  <br>
