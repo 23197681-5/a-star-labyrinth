@@ -27,8 +27,8 @@ function getConfigFile(compiler, loader, loaderOptions, compilerCompatible, log,
         configFile = {
             config: {
                 compilerOptions: {},
-                files: [],
-            },
+                files: []
+            }
         };
     }
     if (!configFileError) {
